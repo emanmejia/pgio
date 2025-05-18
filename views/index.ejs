@@ -8,6 +8,8 @@
 </head>
 <body>
 <body>
+<%- include("_header") -%>
+
   <h1>PostgreSQL IO Application</h1>
   <% if(message !== "success") { %>
       <h1>We Encountered an Error</h1>
@@ -35,6 +37,7 @@
           </tbody>
       </table>
   <% } %>
+  <%- include("_footer") -%>
 </body>
 
 </body>
