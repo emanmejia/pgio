@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // Add required packages
 const express = require("express");
 const app = express();
@@ -24,5 +26,19 @@ app.listen(process.env.PORT || 5001, () => {
 // Setup routes
 app.get("/", (req, res) => {
   //res.send ("Hello world...");
-  res.render("index");
+  const sql = "SELECT * FROM PRODUCT ORDER BY PROD_ID";
+  pool.query(sql, [], (err, result) => {
+      let message = "";
+      let model = {};
+      if(err) {
+          message = `Error - ${err.message}`;
+      } else {
+          message = "success";
+          model = result.rows;
+      };
+      res.render("index", {
+          message: message,
+          model : model
+      });
+  });
 });
